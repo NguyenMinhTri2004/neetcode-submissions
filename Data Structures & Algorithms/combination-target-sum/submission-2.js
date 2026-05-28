@@ -1,0 +1,29 @@
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @param {number} target
+     * @returns {number[][]}
+     */
+    combinationSum(nums, target) {
+       let res = [];
+       nums.sort((a,b) => a - b);
+       
+       function backtrackTracking(start, current, remaining){
+          if(remaining === 0){
+             res.push([...current])
+             return
+          }
+
+
+          for(let i = start; i < nums.length; i++){
+             if(nums[i] > remaining) break;
+             current.push(nums[i]);
+             backtrackTracking(i, current, remaining - nums[i]);
+             current.pop()
+          }
+       }
+
+       backtrackTracking(0, [], target);
+       return res;
+    }
+}
